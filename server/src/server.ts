@@ -50,7 +50,7 @@ process.stdin.on("data", (chunk) =>{
 	buf += chunk; 
 	while (true) {
 		// check for content length line
-		const lengthMatch = buf.match(/Content-Length: (\d+\)\r\n/);
+		const lengthMatch = buf.match(/Content-Length: (\d+)\r\n/);
 		if(!lengthMatch) break;
 		const contentLength = parseInt(lengthMatch[1], 10);
 		const messageStart = buf.indexOf("\r\n\r\n") + 4;

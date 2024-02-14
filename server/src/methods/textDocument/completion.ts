@@ -4,7 +4,7 @@ import * as fs from "fs";
 
 // const words = fs.readFileSync("/usr/share/dict/words").toString().split('\n');
 
-const filePath = "../../../../commands.json";
+const filePath = "/Users/bryar.topham/.lsp/stata/commands.json";
 let syntax = [];
 try {
 	const jsonStr = fs.readFileSync(filePath, 'utf8');
