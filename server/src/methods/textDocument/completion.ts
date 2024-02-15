@@ -3,9 +3,8 @@ import { documents, TextDocumentIdentifier } from "../../documents";
 import * as fs from "fs";
 
 // const words = fs.readFileSync("/usr/share/dict/words").toString().split('\n');
-
-const filePath = "/Users/bryar.topham/.lsp/stata/commands.json";
-let syntax = [];
+let syntax:any = [];
+const filePath = "~/.lsp/stata/commands.json";
 try {
 	const jsonStr = fs.readFileSync(filePath, 'utf8');
 	const jsonObj = JSON.parse(jsonStr);
@@ -47,11 +46,11 @@ export const completion = (message: RequestMessage): CompletionList | null=> {
 	const currentLine = content.split("\n")[params.position.line];
 	const lineUntilCursor = currentLine.slice(0, params.position.character);
 	const currentPrefix = lineUntilCursor.replace(/.*\W(.*?)/, "$1");
-	const items = words.filter((wd) => {
+	const items = syntax.filter((wd:string) => {
 		return wd.startsWith(currentPrefix)
 	})
 	.slice(0,1000)
-	.map((wd)=>{
+	.map((wd:string)=>{
 		return {label: wd};
 	})
 	
