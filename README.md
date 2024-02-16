@@ -5,6 +5,9 @@ terminal buffer in NeoVim,  a simple LSP implementation for autocompletion, and
 syntax highlighting. I haven't tested this on Gnu/Linux yet, as I did this for
 my work machine (on MacOS).
 
+![stata_term](./assets/terminal_spawn.gif) 
+
+
 This effort wouldn't be possible without the following:
 - [Jeffery Chupp's enlightening YT tutorial on LSPs](https://youtu.be/Xo5VXTRoL6Q?si=6c0lw8UDtL-iELL9)
 - [poliquin's stata-vim package for highlighting](https://github.com/poliquin/stata-vim)
