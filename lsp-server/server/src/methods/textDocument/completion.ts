@@ -51,7 +51,8 @@ export const completion = (message: RequestMessage): CompletionList | null=> {
 	})
 	.slice(0,1000)
 	.map((wd:string)=>{
-		return {label: wd};
+		let formattedWd: string = wd.replace(/_/g, ' ');
+		return {label: formattedWd};
 	})
 	
 	return {
