@@ -121,7 +121,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 ```
 An explanation of the keymaps;
-- `leader + leader + mp` -> spawns a <span style="color:#1dd3b0">stata-mp</span> terminal in a new buffer
+- `leader + mp` -> spawns a <span style="color:#1dd3b0">stata-mp</span> terminal in a new buffer
 - `leader + leader + t` -> sends either a visual selection or the current line to
   the <span style="color:#1dd3b0">stata-mp</span> terminal buffer. 
 - `leader + leader + a + t` -> sends all of the contents of the current buffer
