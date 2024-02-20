@@ -6,6 +6,7 @@ local custom_attach = function (client) print("Stata LSP started"); end
 
 vim.cmd [[autocmd BufRead,BufNewFile *.do set filetype=stata]]
 
+--if the config doesn't exist, add it to configs.
 if not configs.stata then
 	configs.stata = {
 		default_config = {
