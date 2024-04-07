@@ -113,18 +113,18 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function ()
 		vim.schedule(function ()
 			vim.keymap.set("n", "<leader>mp", [[:lua OpenBufferTerminalInStata()<CR>]], {noremap=true, buffer=true})
-			vim.keymap.set({"v","x"}, "<leader><leader>t", [[:lua SendToStata(1)<CR>]], {noremap=true, buffer=true})
-			vim.keymap.set("n", "<leader><leader>t", [[:lua SendToStata(0)<CR>]], {noremap=true, buffer=true})
-			vim.keymap.set("n", "<leader><leader>at", [[:lua SendToStata(2)<CR>]], {noremap=true, buffer=true})
+			vim.keymap.set({"v","x"}, "\t", [[:lua SendToStata(1)<CR>]], {noremap=true, buffer=true})
+			vim.keymap.set("n", "\d", [[:lua SendToStata(0)<CR>]], {noremap=true, buffer=true})
+			vim.keymap.set("n", "\aa", [[:lua SendToStata(2)<CR>]], {noremap=true, buffer=true})
 		end)
 	end,
 })
 ```
 An explanation of the keymaps;
 - `leader + mp` -> spawns a <span style="color:#1dd3b0">stata-mp</span> terminal in a new buffer
-- `leader + leader + t` -> sends either a visual selection or the current line to
+- `\ + d` -> sends either a visual selection or the current line to
   the <span style="color:#1dd3b0">stata-mp</span> terminal buffer. 
-- `leader + leader + a + t` -> sends all of the contents of the current buffer
+- `\ + aa` -> sends all of the contents of the current buffer
   up to and including the current line to the <span style="color:#1dd3b0">stata-mp</span> terminal buffer.
 
 <small>I have mapped my `leader` key to the space " " bar.</small>
