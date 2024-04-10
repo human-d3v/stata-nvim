@@ -25,7 +25,7 @@ This effort wouldn't be possible without the following:
 1) Add `stata-mp` or `stata-se` terminal to your `$PATH`. This can be
 accomplished by adding the following to your `.zshrc`:
 ```bash
-export PATH="$PATH:/Applications/Stata/StataMP.app/Contents/MacOS/"
+export PATH="$PATH:/Applications/Stata/StataMP.app/Contents/MacOS/"/
 
 ## You can also use the following from any zsh terminal to append the command to your .zshrc
 
@@ -113,9 +113,9 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function ()
 		vim.schedule(function ()
 			vim.keymap.set("n", "<leader>mp", [[:lua OpenBufferTerminalInStata()<CR>]], {noremap=true, buffer=true})
-			vim.keymap.set({"v","x"}, "\t", [[:lua SendToStata(1)<CR>]], {noremap=true, buffer=true})
-			vim.keymap.set("n", "\d", [[:lua SendToStata(0)<CR>]], {noremap=true, buffer=true})
-			vim.keymap.set("n", "\aa", [[:lua SendToStata(2)<CR>]], {noremap=true, buffer=true})
+			vim.keymap.set({"v","x"}, "<BSlash>d", [[:lua SendToStata(1)<CR>]], {noremap=true, buffer=true})
+			vim.keymap.set("n", "<BSlash>d", [[:lua SendToStata(0)<CR>]], {noremap=true, buffer=true})
+			vim.keymap.set("n", "<BSlash>aa", [[:lua SendToStata(2)<CR>]], {noremap=true, buffer=true})
 		end)
 	end,
 })
