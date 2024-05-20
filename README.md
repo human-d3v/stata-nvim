@@ -35,14 +35,14 @@ echo 'export PATH="$PATH:/Applications/Stata/StataMP.app/Contents/MacOS/"' >> ~/
 <span style="color:#1dd3b0">StataSE</span></i></small>
 
 2) Create the functionality in your `~/.config/nvim/after/plugin/` directory to
-spawn the terminal. In my [config](https://github.com/human-d3v/neovimConfig)
+spawn the terminal. In my [config](https://github.com/human-d3v/nvim)
 the file is called [stataHandler.lua](https://github.com/human-d3v/neovimConfig/blob/main/lazy/nvim/after/plugin/stataHandler.lua) in a subdirectory called `stata_lsp/`
 
 ```lua
-function OpenBufferTerminalInStata()
+function OpenTermBufferRepl(term_type)
 	vim.api.nvim_exec('new | term', false)
 	local bufnr = vim.api.nvim_get_current_buf()
-  vim.api.nvim_chan_send(vim.api.nvim_buf_get_option(bufnr, 'channel'), 'stata-mp' .. "\r")
+  vim.api.nvim_chan_send(vim.api.nvim_get_option_value('channel',{buf=bufnr}), term_type .. "\r")
 end
 ```
 This snippet spawns a new terminal buffer and populates the first command with
@@ -55,7 +55,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = {"stata"},
 	callback = function ()
 		vim.schedule(function ()
-			vim.keymap.set("n", "<leader>mp", [[:lua OpenBufferTerminalInStata()<CR>]], {noremap=true, buffer=true})
+			vim.keymap.set("n", "<leader>mp", [[:lua OpenTermBufferRepl('stata-mp')<CR>]], {noremap=true, buffer=true})
         end)
     end,
 })
@@ -72,6 +72,18 @@ current line to the terminal.
 The resulting function looks like this: 
 
 ```lua
+local function next_line()
+   local current_line = vim.api.nvim_get_current_line(0)[1]
+   local total_lines = vim.api.nvim_buf_line_count(0)
+   for i = current_line + 1, total_lines do
+    local line_content = vim.api.nvim_buf_get_lines(0, i-1, i, false)[1]
+        if line_content:match('^%S') then
+            vim.api.nvim_win_set_cursor(0, {i,0})
+            break
+        end
+   end
+end 
+
 function SendToStata(opt)
 	--0: send the current line to Stata
 	--1: send the visual selection to Stata
@@ -80,6 +92,7 @@ function SendToStata(opt)
 	if opt == 1 then
 		vim.cmd('normal! gv"xy') --captures vis selection
 		txt = vim.fn.getreg('x')
+        vim.api.nvim_exec2(":'>", {})
 	elseif opt == 2 then
 		local ln, _  = unpack(vim.api.nvim_win_get_cursor(0))
 		local lnTxts = vim.api.nvim_buf_get_lines(vim.api.nvim_get_current_buf(), 0, ln, false)
@@ -87,6 +100,8 @@ function SendToStata(opt)
 	else
 		txt = vim.api.nvim_get_current_line()
 	end
+
+    next_line() -- move to next non-whitespace line after cursor
 
 	local term_buf = nil
 	for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
@@ -100,7 +115,7 @@ function SendToStata(opt)
 		return
 	end
 
-	vim.api.nvim_chan_send(vim.api.nvim_buf_get_option(term_buf, 'channel'), txt .. '\r')
+	vim.api.nvim_chan_send(vim.api.nvim_get_option_value('channel',{buf=term_buf}), txt .. '\r')
 end
 ```
 The above function accepts an `opt` argument (integer) which is used to decide
@@ -112,7 +127,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = {"stata"},
 	callback = function ()
 		vim.schedule(function ()
-			vim.keymap.set("n", "<leader>mp", [[:lua OpenBufferTerminalInStata()<CR>]], {noremap=true, buffer=true})
+			vim.keymap.set("n", "<leader>mp", [[:lua OpenTermBufferRepl('stata-mp')<CR>]], {noremap=true, buffer=true})
 			vim.keymap.set({"v","x"}, "<BSlash>d", [[:lua SendToStata(1)<CR>]], {noremap=true, buffer=true})
 			vim.keymap.set("n", "<BSlash>d", [[:lua SendToStata(0)<CR>]], {noremap=true, buffer=true})
 			vim.keymap.set("n", "<BSlash>aa", [[:lua SendToStata(2)<CR>]], {noremap=true, buffer=true})
@@ -120,7 +135,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 ```
-An explanation of the keymaps;
+An explanation of the keymaps. These were chosen because they are the default keymaps for [R.nvim](https://github.com/R-nvim/R.nvim) that has a similar workflow.
 - `leader + mp` -> spawns a <span style="color:#1dd3b0">stata-mp</span> terminal in a new buffer
 - `\ + d` -> sends either a visual selection or the current line to
   the <span style="color:#1dd3b0">stata-mp</span> terminal buffer. 
@@ -148,7 +163,7 @@ npm i
 ## <span style="color:#F87060">Attaching the LSP to the Current Buffer</span>
 Attaching the lsp to the current buffer is as simple as attaching the server to
 the filetype and appending the configuration to
-[lspconfig](https://github.com/neovim/nvim-lspconfig).configs file:
+[lspconfig](https://github.com/neovim/nvim-lspconfig) .configs file:
 
 ```lua
 local lspconfig = require("lspconfig")
