@@ -2,6 +2,8 @@ import { RequestMessage } from "../../server";
 import { documents, TextDocumentIdentifier } from "../../documents";
 import * as fs from "fs";
 
+const MAX_LENGTH = 1000;
+
 // const words = fs.readFileSync("/usr/share/dict/words").toString().split('\n');
 let syntax:any = [];
 const filePath = "~/.lsp/stata/commands.json";
@@ -49,14 +51,14 @@ export const completion = (message: RequestMessage): CompletionList | null=> {
 	const items = syntax.filter((wd:string) => {
 		return wd.startsWith(currentPrefix)
 	})
-	.slice(0,1000)
+	.slice(0,MAX_LENGTH)
 	.map((wd:string)=>{
 		let formattedWd: string = wd.replace(/_/g, ' ');
 		return {label: formattedWd};
 	})
 	
 	return {
-		isIncomplete: true, 
+		isIncomplete: items.length === MAX_LENGTH, 
 		items,
 	};
 };
