@@ -22,6 +22,26 @@ function OpenBufferTerminalRepl(term_type)
 end
 
 
+function CloseRepl(term_type)
+	if term_type == 'stata-mp' then
+		if vim.g.stata_repl ~= nil then
+			vim.api.nvim_buf_delete(vim.g.stata_repl, {force = true})
+		end
+	else
+		print("No terminal found.")
+	end
+end
+
+
+function VerifyCloseRepl(term)
+	local answer = vim.fn.input('Are you sure you want to close the REPL? (y/n)')
+	if answer:lower() == 'y' then
+		CloseRepl(term)
+	else
+		print("\nAction Cancelled")
+	end
+end
+
 
 local function nextLine()
 	local current_line = vim.api.nvim_win_get_cursor(0)[1]
