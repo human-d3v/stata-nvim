@@ -108,7 +108,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 				if term_buf == nil then
 					local answer = vim.fn.input('No terminal found. Do you want to open one? [y/n]\n')
-					if answer:lower() == 'y' then 
+					if answer:lower() == 'y' then
 						OpenBufferTerminalRepl('stata-mp')
 						term_buf = vim.g.stata_repl --set variable since it didn't get set above
 					else
