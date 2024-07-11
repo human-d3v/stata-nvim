@@ -1,9 +1,27 @@
 function OpenBufferTerminalRepl(term_type)
-	-- vim.api.nvim_exec('new | term', false)
+	--set gloabl variable for code buffer 
+	vim.g.code_buf = vim.api.nvim_get_current_buf()
+
+	--open term buf and move cursor there	
 	vim.api.nvim_exec2('belowright split | term', {output = true})
 	local bufnr = vim.api.nvim_get_current_buf()
+	
+	--set gloabl variable for stata buf
+	if term_type == 'stata-mp' then
+		vim.g.stata_repl = bufnr
+	else 
+		vim.g.term_buf = bufnr
+	end
+
   vim.api.nvim_chan_send(vim.api.nvim_get_option_value( 'channel',{buf = bufnr}), term_type .. "\r")
+
+	--move cursor to the end of the stata repl
+	vim.api.nvim_win_set_cursor(0, {vim.api.nvim_buf_line_count(bufnr),0})
+	--move cursor back to code_buf
+	vim.cmd('wincmd p')
 end
+
+
 
 local function nextLine()
 	local current_line = vim.api.nvim_win_get_cursor(0)[1]
