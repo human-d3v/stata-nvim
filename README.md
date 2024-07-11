@@ -14,6 +14,7 @@ This effort wouldn't be possible without the following:
 - [HankBo's commands.json file from stata-language-server](https://github.com/HankBO/stata-language-server)
 
 
+
 ## <span style="color:#F87060">Dependencies</span>
 - [NeoVim](https://github.com/neovim/neovim/tree/master) >= v0.9.0
 - [npx](https://www.npmjs.com/package/npx)
