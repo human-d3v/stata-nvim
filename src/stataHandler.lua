@@ -56,35 +56,61 @@ local function nextLine()
 	end
 end
 
-function SendToRepl(opt)
+
+function SendToRepl(repl_type, input_type, ...)
+	-- repl_type <- right now it's only stata, but the same functionality could
+	--- work for a regular terminal or python files
+	-- 'stata'
+
+	-- input_type
 	--0: send the current line to Repl 
 	--1: send the visual selection to Repl
 	--2: send the entire file up to and including the current line to Repl 
+	--3
 	local txt = ''
-	if opt == 1 then
+	if input_type == 1 then -- visual selection
 		vim.cmd('normal! gv"xy') --captures vis selection
 		txt = vim.fn.getreg('x')
 		vim.api.nvim_exec2(":'>", {})
-	elseif opt == 2 then
+	elseif input_type == 2 then -- normal mode entire file 
 		local ln, _  = unpack(vim.api.nvim_win_get_cursor(0))
 		local lnTxts = vim.api.nvim_buf_get_lines(vim.api.nvim_get_current_buf(), 0, ln, false)
 		txt = table.concat(lnTxts, "\n")
+	elseif input_type == 3 then -- send text explicitly
+		if ... then 
+			for i, v in ipairs({...}) do
+				txt = txt .. v
+			end
+		end
 	else
 		txt = vim.api.nvim_get_current_line()
 	end
 
-	nextLine() -- move to next non-whitespace line
+	nextLine() -- move to next non-comment, non-whitespace line
 
 	local term_buf = nil
-	for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
-		if vim.bo[bufnr].buftype == 'terminal' then
-			term_buf = bufnr
-			break
+	if repl_type == 'stata' then
+		if vim.g.stata_repl ~= nil then
+			term_buf = vim.g.stata_repl
+		end
+	else
+		for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+			if vim.bo[bufnr].buftype == 'terminal' then
+				term_buf = bufnr
+				break
+			end
 		end
 	end
+	
 	if term_buf == nil then
-		print("No terminal found.")
-		return
+		local answer = vim.fn.input('No terminal found. Do you want to open one? [y/n]\n')
+		if answer:lower() == 'y' then 
+			OpenBufferTerminalRepl('stata-mp')
+			term_buf = vim.g.stata_repl --set variable since it didn't get set above
+		else
+			print('\nAction Cancelled')
+			return
+		end
 	end
 
 	vim.api.nvim_chan_send(vim.api.nvim_get_option_value('channel', {buf = term_buf}), txt .. '\r')
