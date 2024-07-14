@@ -202,6 +202,8 @@ mkdir ~/.lsp
 cp -r ./stata-nvim/lsp-server ~/.lsp
 # navigate to the directory 
 cd ~/.lsp/lsp-server
+# Initailize npm project
+npm init
 # install the necessary dependencies
 npm i
 ```
