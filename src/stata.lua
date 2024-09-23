@@ -3,7 +3,6 @@ local configs = require("lspconfig.configs")
 
 local custom_attach = function (client) print("Stata LSP started"); end
 
-
 vim.cmd [[autocmd BufRead,BufNewFile *.do set filetype=stata]]
 
 --if the config doesn't exist, add it to configs.
