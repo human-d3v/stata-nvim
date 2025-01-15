@@ -17,7 +17,7 @@ end
 
 local function check_necessary_env_vars()
 	local path = vim.fn.getenv("PATH")
-	local paths = vim.split(path, ";")
+	local paths = vim.split(path, ":")
 	
 	local mp = "StataMP.app"
 	local se = "StataSE.app"
