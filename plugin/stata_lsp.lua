@@ -32,7 +32,7 @@ local function check_necessary_env_vars()
   return stata_version
 end
 
-local function main()
+local function setup_lsp()
 	local lsp_path = vim.fn.expand(
 		vim.fn.fnamemodify(vim.fn.getcwd(), ":h") .. "/lsp-server/server/src/server.ts"
 	)
@@ -73,4 +73,4 @@ local function main()
 	}
 end
 
-return main()
+return setup_lsp()
