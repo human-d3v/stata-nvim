@@ -3,9 +3,16 @@ local configs = require("lspconfig.configs")
 
 
 local function check_necessary_packages()
-	local npx_result = vim.fn.system("npx --version")
-	local ts_node_result = vim.fn.system("ts-node --version")
-	return {npx =  (npx_result == 0), ts_node = (ts_node_result==0)}
+	local function check_command (cmd)
+		local success, _ = pcall(function()
+			return vim.fn.system("which " .. cmd)
+		end)
+		return success and vim.v.shell_error == 0
+	end
+	return {
+		npx = check_command("npx"),
+		ts_node = check_command("ts-node")
+	}
 end
 
 local function check_necessary_env_vars()
