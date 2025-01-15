@@ -4,6 +4,7 @@ function M.setup(opts)
 	local terminal = require("terminal")
 	local repl = require("repl")
 	local opts = opts or {stata_license_type = "stata-mp"}
+	require("lsp").setup()
 end
 
 return M
