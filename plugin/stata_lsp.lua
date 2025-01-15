@@ -73,3 +73,6 @@ local function setup_lsp()
 	}
 end
 
+return {
+	setup = setup_lsp()
+}
