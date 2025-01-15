@@ -1,14 +1,13 @@
-local M = {}
 local augroup = vim.api.nvim_create_augroup("Stata", {clear = true})
 
-function M.main(opts)
+local function main(opts)
 	local terminal = require("terminal")
 	local repl = require("repl")
 	local opts = opts or {stata_license_type = "stata-mp"}
 	require("lsp").setup()
 end
 
-function M.setup(opts)
+local function setup(opts)
 	vim.api.nvim_create_autocmd("VimEnter", 
 		{group = augroup, 
 		pattern = {"stata"},
@@ -17,4 +16,4 @@ function M.setup(opts)
 		callback = M.main(opts)})
 end
 
-return M
+return {setup = setup} 
