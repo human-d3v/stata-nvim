@@ -73,4 +73,3 @@ local function setup_lsp()
 	}
 end
 
-return setup_lsp()
