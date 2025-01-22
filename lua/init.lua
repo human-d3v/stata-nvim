@@ -15,7 +15,12 @@ local function setup()--opts)
 		once = true, 
 		-- callback = main()--opts)})
 		callback = function ()
-			print("Stata LSP Setup")
+			vim.api.nvim_create_autocmd('FileType', {
+				pattern = 'stata',
+				callback = function ()
+					print("starting LSP for Stata")
+				end
+			}
 		end
 	})
 end
