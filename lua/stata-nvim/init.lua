@@ -1,4 +1,3 @@
--- local augroup = vim.api.nvim_create_augroup("Stata", {clear = true})
 --
 -- local function main() --opts)
 -- 	-- local terminal = require("terminal")
@@ -27,4 +26,25 @@
 --
 -- setup()
 
-print("HERE AM I")
+-- local M = {}
+--
+-- function M.setup()
+-- 	print("stata-nvim loaded")
+-- end
+--
+-- return M
+local M = {}
+
+
+function M.setup(opts)
+	local augroup = vim.api.nvim_create_augroup("Stata", {clear = true})
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = "stata",
+		group = augroup,
+		callback = function ()
+			vim.api.nvim_set_keymap("n", "<leader>mm", print("stata-nvim loaded"), {buffer = true})
+		end
+	})
+end
+
+return M
