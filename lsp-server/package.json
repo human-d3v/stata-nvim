@@ -1,7 +1,7 @@
 {
-  "name": "REPLACE_ME",
-  "description": "REPLACE_ME",
-  "author": "REPLACE_ME",
+  "name": "Stata LSP",
+  "description": "Language Server Protocol for Stata do and ado files for neovim plugin",
+  "author": "human-d3v (brytop05@proton.me)",
   "license": "MIT",
   "version": "1.0.0",
   "publisher": "REPLACE_ME",
