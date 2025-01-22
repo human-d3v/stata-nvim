@@ -9,7 +9,7 @@ let syntax:any = [];
 const filePath = path.join(os.homedir(), '.local', 'share', 'nvim', 'lazy', 
 													 'stata-nvim', 'lsp-server', 'commands.json')
 try {
-	const jsonStr = fs.readFileSync(filePath, 'utf8');
+	const jsonStr = fs.readFileSync(filePath, {encoding:'utf8'});
 	const jsonObj = JSON.parse(jsonStr);
 	syntax = jsonObj.syntax;
 } catch (err) {
