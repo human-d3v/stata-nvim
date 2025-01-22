@@ -20,7 +20,7 @@ local function setup()--opts)
 				callback = function ()
 					print("starting LSP for Stata")
 				end
-			}
+			})
 		end
 	})
 end
