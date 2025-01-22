@@ -7,7 +7,7 @@ local function main() --opts)
 	require("lsp").setup()
 end
 
-local function setup(opts)
+local function setup()--opts)
 	vim.api.nvim_create_autocmd("VimEnter", 
 		{group = augroup, 
 		pattern = {"stata"},
@@ -20,4 +20,4 @@ local function setup(opts)
 	})
 end
 
-return {setup = setup} 
+return {setup = setup()} 
