@@ -46,7 +46,7 @@ const respond = (id: RequestMessage['id'], result:object | null) => {
 */
 let buf = ''; 
 
-process.stdin.on("data", (chunk) =>{
+process.stdin.on("data", (chunk: string) => {
 	buf += chunk; 
 	while (true) {
 		// check for content length line
