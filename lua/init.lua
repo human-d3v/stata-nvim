@@ -13,7 +13,10 @@ local function setup(opts)
 		pattern = {"stata"},
 		desc = "Stata LSP Setup",
 		once = true, 
-		callback = main()--opts)})
+		-- callback = main()--opts)})
+		callback = function ()
+			print("Stata LSP Setup")
+		end
 	})
 end
 
