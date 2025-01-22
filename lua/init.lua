@@ -1,9 +1,9 @@
 local augroup = vim.api.nvim_create_augroup("Stata", {clear = true})
 
-local function main(opts)
-	local terminal = require("terminal")
-	local repl = require("repl")
-	local opts = opts or {stata_license_type = "stata-mp"}
+local function main() --opts)
+	-- local terminal = require("terminal")
+	-- local repl = require("repl")
+	-- local opts = opts or {stata_license_type = "stata-mp"}
 	require("lsp").setup()
 end
 
@@ -13,7 +13,8 @@ local function setup(opts)
 		pattern = {"stata"},
 		desc = "Stata LSP Setup",
 		once = true, 
-		callback = main(opts)})
+		callback = main()--opts)})
+	})
 end
 
 return {setup = setup} 
