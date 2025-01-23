@@ -36,9 +36,7 @@ end
 
 function M.setup()
 	local lsp_path = vim.fn.expand(
-		vim.fn.fnamemodify(
-			vim.fn.fnamemodify(
-				vim.fn.getcwd(), ":h"), ":h") .. "/lsp-server/server/src/server.ts"
+		"$HOME/.local/share/nvim/lazy/stata-nvim/lsp-server/server/src/server.ts"
 	)
 
 	vim.cmd [[autocmd BufRead,BufNewFile *.do set filetype=stata]]
