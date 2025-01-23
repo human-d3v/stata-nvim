@@ -67,7 +67,7 @@ function M.setup(opts)
 		configs.stata = {
 			default_config = {
 				cmd = {
-					"npx", "ts-node",
+					-- "npx", "ts-node",
 					lsp_path
 				},
 				filetypes = {"stata"},
