@@ -36,7 +36,7 @@
 local M = {}
 
 local function main()
-	require('lsp').setup()
+	require('stata-nvim.lsp').setup()
 end
 
 function M.setup()
