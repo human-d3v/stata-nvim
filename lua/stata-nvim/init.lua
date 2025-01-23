@@ -35,18 +35,18 @@
 -- return M
 local M = {}
 
-local function main()
-	require('stata-nvim.lsp').setup({dev = true})
+local function main(opts)
+	require('stata-nvim.lsp').setup(opts)
 end
 
-function M.setup()
+function M.setup(opts)
 	vim.api.nvim_create_autocmd('FileType', {
 		pattern = {"stata"},
 		once = true,
 		callback = function()
 			vim.schedule(
 				function ()
-					main()
+					main(opts)
 				end
 			)
 		end

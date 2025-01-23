@@ -38,11 +38,11 @@ function M.setup(opts)
 	local lsp_path
 	if opts.dev == false then
 		lsp_path = vim.fn.expand(
-			vim.fn.stdpath('data') .. "/lazy/stata-nvim/lsp-server/server/src/server.ts"
+			vim.fn.stdpath('data') .. "/lazy/stata-nvim/lsp-server/server_bin"
 		)
 	else
 		lsp_path = vim.fn.expand(
-			"~/Documents/plugins/stata-nvim/lsp-server/server/src/server.ts"
+			"~/Documents/plugins/stata-nvim/lsp-server/server_bin"
 		)
 	end
 
