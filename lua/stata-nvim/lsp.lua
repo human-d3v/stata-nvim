@@ -34,10 +34,17 @@ function M.CheckNecessaryEnvVars()
   return stata_version
 end
 
-function M.setup()
-	local lsp_path = vim.fn.expand(
-		"$HOME/.local/share/nvim/lazy/stata-nvim/lsp-server/server/src/server.ts"
-	)
+function M.setup(opts)
+	local lsp_path
+	if opts.dev == false then
+		lsp_path = vim.fn.expand(
+			vim.fn.stdpath('data') .. "/lazy/stata-nvim/lsp-server/server/src/server.ts"
+		)
+	else
+		lsp_path = vim.fn.expand(
+			"~/Documents/plugins/stata-nvim/lsp-server/server/src/server.ts"
+		)
+	end
 
 	vim.cmd [[autocmd BufRead,BufNewFile *.do set filetype=stata]]
 
