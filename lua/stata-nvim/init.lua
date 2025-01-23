@@ -35,14 +35,20 @@
 -- return M
 local M = {}
 
+local function main()
+	require('lsp').setup()
+end
 
-function M.setup(opts)
-	local augroup = vim.api.nvim_create_augroup("Stata", {clear = true})
-	vim.api.nvim_create_autocmd("FileType", {
-		pattern = "stata",
-		group = augroup,
-		callback = function ()
-			vim.api.nvim_set_keymap("n", "<leader>mm", print("stata-nvim loaded"), {buffer = true})
+function M.setup()
+	vim.api.nvim_create_autocmd('FileType', {
+		pattern = {"stata"},
+		once = true,
+		callback = function()
+			vim.schedule(
+				function ()
+					main()
+				end
+			)
 		end
 	})
 end

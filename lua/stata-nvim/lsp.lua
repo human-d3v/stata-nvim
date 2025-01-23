@@ -36,7 +36,9 @@ end
 
 function M.setup()
 	local lsp_path = vim.fn.expand(
-		vim.fn.fnamemodify(vim.fn.getcwd(), ":h") .. "/lsp-server/server/src/server.ts"
+		vim.fn.fnamemodify(
+			vim.fn.fnamemodify(
+				vim.fn.getcwd(), ":h"), ":h") .. "/lsp-server/server/src/server.ts"
 	)
 
 	vim.cmd [[autocmd BufRead,BufNewFile *.do set filetype=stata]]
