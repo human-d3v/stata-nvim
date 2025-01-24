@@ -13,7 +13,7 @@ export const initialize = (message: RequestMessage): InitializeResult => {
 	return {
 		capabilities: {completionProvider: {},textDocumentSync: 1},
 		serverInfo: {
-			name: "lsp-from-scratch",
+			name: "Stata LSP",
 			version: "0.0.1"
 		}
 	}

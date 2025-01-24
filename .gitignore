@@ -1,1 +1,4 @@
 node_modules/
+lsp-server/server_bin
+lsp-server/package.json
+lsp-server/server/package.json

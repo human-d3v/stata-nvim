@@ -1,12 +1,15 @@
 import { RequestMessage } from "../../server";
 import { documents, TextDocumentIdentifier } from "../../documents";
 import * as fs from "fs";
+import * as path from 'path';
+import * as os from 'os';
 
 // const words = fs.readFileSync("/usr/share/dict/words").toString().split('\n');
 let syntax:any = [];
-const filePath = "~/.lsp/stata/commands.json";
+const filePath = path.join(os.homedir(), '.local', 'share', 'nvim', 'lazy', 
+													 'stata-nvim', 'lsp-server', 'commands.json')
 try {
-	const jsonStr = fs.readFileSync(filePath, 'utf8');
+	const jsonStr = fs.readFileSync(filePath, {encoding:'utf8'});
 	const jsonObj = JSON.parse(jsonStr);
 	syntax = jsonObj.syntax;
 } catch (err) {

@@ -1,7 +1,7 @@
 {
-  "name": "REPLACE_ME",
-  "description": "REPLACE_ME",
-  "author": "REPLACE_ME",
+  "name": "stata-lsp",
+  "description": "Language Server Protocol for Stata do and ado files for neovim plugin",
+  "author": "human-d3v (brytop05@proton.me)",
   "license": "MIT",
   "version": "1.0.0",
   "publisher": "REPLACE_ME",
@@ -23,7 +23,8 @@
     "postinstall": "cd client && npm install && cd ../server && npm install && cd .."
   },
   "devDependencies": {
-    "@types/node": "^20.5.7",
+    "@types/node": "^20.17.14",
     "typescript": "^5.2.2"
-  }
+  },
+  "keywords": []
 }
