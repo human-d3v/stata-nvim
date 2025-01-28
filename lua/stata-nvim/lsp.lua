@@ -20,7 +20,7 @@ end
 function M.CheckNecessaryEnvVars()
 	local path = vim.fn.getenv("PATH")
 	local paths = vim.split(path, ":")
-	
+
 	local mp = "StataMP.app"
 	local se = "StataSE.app"
 	local stata_version = {mp = false, se = false}
@@ -58,11 +58,11 @@ function M.setup(opts)
 	if not pkgs.npx or not pkgs.ts_node then
 		vim.notify("stata-nvim: npx and ts-node are required before running this lsp", vim.log.levels.ERROR)
 	end
-	
+
 	if not env.mp and not env.se then
     vim.notify("stata-nvim: StataMP or StataSE is required in PATH", vim.log.levels.ERROR)
   end
-	
+
 	if not configs.stata then
 		configs.stata = {
 			default_config = {
