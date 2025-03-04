@@ -5,7 +5,7 @@ terminal buffer in NeoVim,  a simple LSP implementation for autocompletion, and
 syntax highlighting. I haven't tested this on Gnu/Linux yet, as I did this for
 my work machine (on MacOS).
 
-![stata_term](./assets/terminal_spawn.gif) 
+![stata](./assets/stata_spawn.mp4) 
 
 
 This effort wouldn't be possible without the following:
@@ -50,13 +50,13 @@ echo 'export PATH="$PATH:/Applications/Stata/StataMP.app/Contents/MacOS/"' >> ~/
 This looks a little gross, but let's break it down:
 - `"human-d3v/stata-nvim", branch = 'packaging'` is just the name of the repository with its accompanying branch.
 - `ft = {'stata'}` only loads the plugin if the file type is stata.
--    ```lua 
-        build = 'git pull origin packaging && cd lsp-server && npm init -y && npm
-        install && bun build ./server/src/server.ts --compile --outfile server_bin &&
-        cd ..' 
-    ```
-    This compiles the language server into a binary using bun to be used by lua
-    when the file type is stata. This helps speed things up. 
+```lua 
+build = 'git pull origin packaging && cd lsp-server && npm init -y && npm
+install && bun build ./server/src/server.ts --compile --outfile server_bin &&
+cd ..' 
+```
+This compiles the language server into a binary using bun to be used by lua
+when the file type is stata. This helps speed things up. 
 - `config = function () require("stata-nvim") end` loads the plugin into the vimruntime to be accessed by by the plugin configuration.
 - `event = 'VeryLazy'` Puts the priority of the plugin loading to the last possible thing. So it's not messing with any other plugins.
 
@@ -76,7 +76,7 @@ This loads the correct license type and avoids the dev mode.
 ## Keybindings:
 | Mode | Keybinding | Description |
 | ---- | ---------- | ----------- |
-| Normal | <leader>mp | Spawns a *Stata* terminal |
+| Normal | leader + mp | Spawns a *Stata* terminal |
 | Normal | \d         | sends the current line to the *Stata* terminal |
 | Visual | \d         | sends the current visual line/block to the *Stata* terminal |
 | Normal | \q         | closes the *Stata* terminal |
