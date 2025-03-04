@@ -5,7 +5,11 @@ terminal buffer in NeoVim,  a simple LSP implementation for autocompletion, and
 syntax highlighting. I haven't tested this on Gnu/Linux yet, as I did this for
 my work machine (on MacOS).
 
-![stata](./assets/stata_spawn.mp4) 
+
+
+
+https://github.com/user-attachments/assets/000783ea-4ce6-4060-85e3-6362476f0d04
+
 
 
 This effort wouldn't be possible without the following:
