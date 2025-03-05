@@ -10,13 +10,36 @@ const filePath = path.join(os.homedir(), '.local', 'share', 'nvim', 'lazy',
 													 'stata-nvim', 'lsp-server', 'commands_updated.json')
 
 enum SyntaxType {
-	MATH = 'math', 
-	SCALAR = 'scalar',
+	BETA_NONCENTRAL = 'beta-noncentral',
+	BINOMIAL = 'binomial',
+	CAUCHY = 'cauchy',
+	CHI_SQUARE = 'chi-square',
 	COMMAND = 'command',
-	WEIBULL = 'weibull',
-	TRIG = 'trig',
-	WISHART = 'wishart',
+	DATETIME = 'datetime',
+	DUNNETT = 'dunnett',
+	EXPONENTIAL = 'exponential',
+	F_DISTRO = 'f-distro',
+	GAMMA = 'gamma',
+	HYPERGEOMETRIC = 'hypergeometric',
+	INV_GAUSSIAN = 'inv-gaussian',
+	LAPLACE = 'laplace',
+	LOGISTIC = 'logistic',
+	MATH = 'math', 
+	MATRIX = 'matrix',
+	NORMAL = 'normal',
+	NEG_BINOMIAL = 'neg-binomial',
+	POISSON = 'poisson',
 	PROGRAMMING = 'programming',
+	RANDOM = 'random',
+	SCALAR = 'scalar',
+	STRING_FUNC = 'string-func',
+	STUDENT_T = 'student-t',
+	TIME_SERIES = 'time-series',
+	TRIG = 'trig',
+	TURKEY = 'turkey',
+	WEIBULL = 'weibull',
+	WEIBULL_PROP = 'weibull-prop',
+	WISHART = 'wishart',
 }
 
 interface SyntaxObject {
@@ -29,8 +52,6 @@ try {
 	const jsonObj = JSON.parse(jsonStr);
 	// syntax = jsonObj.syntax;
 	syntax = jsonObj.syntax.array.map();
-		
-	});
 } catch (err) {
 	console.error("error parsing JSON",err);
 }
