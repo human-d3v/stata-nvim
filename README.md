@@ -80,7 +80,7 @@ This loads the correct license type and avoids the dev mode.
 ## Keybindings:
 | Mode | Keybinding | Description |
 | ---- | ---------- | ----------- |
-| Normal | leader + mp | Spawns a *Stata* terminal |
+| Normal | leader + leader + mp | Spawns a *Stata* terminal |
 | Normal | \d         | sends the current line to the *Stata* terminal |
 | Visual | \d         | sends the current visual line/block to the *Stata* terminal |
 | Normal | \q         | closes the *Stata* terminal |
