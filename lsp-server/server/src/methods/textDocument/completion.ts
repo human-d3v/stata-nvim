@@ -7,11 +7,30 @@ import * as os from 'os';
 // const words = fs.readFileSync("/usr/share/dict/words").toString().split('\n');
 let syntax:any = [];
 const filePath = path.join(os.homedir(), '.local', 'share', 'nvim', 'lazy', 
-													 'stata-nvim', 'lsp-server', 'commands.json')
+													 'stata-nvim', 'lsp-server', 'commands_updated.json')
+
+enum SyntaxType {
+	MATH = 'math', 
+	SCALAR = 'scalar',
+	COMMAND = 'command',
+	WEIBULL = 'weibull',
+	TRIG = 'trig',
+	WISHART = 'wishart',
+	PROGRAMMING = 'programming',
+}
+
+interface SyntaxObject {
+	command: string;
+	type: SyntaxType;
+}
+
 try {
 	const jsonStr = fs.readFileSync(filePath, {encoding:'utf8'});
 	const jsonObj = JSON.parse(jsonStr);
-	syntax = jsonObj.syntax;
+	// syntax = jsonObj.syntax;
+	syntax = jsonObj.syntax.array.map();
+		
+	});
 } catch (err) {
 	console.error("error parsing JSON",err);
 }
